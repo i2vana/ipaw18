@@ -1,0 +1,77 @@
+@prefix bld: <http://example.org/buildings#> .
+@prefix decprov: <http://promsns.org/def/decprov#> .
+@prefix ex: <http://www.example.ex/ns/ex#> .
+@prefix ga: <http://www.sentinel.ga.gov.au/hotspots#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix gov: <http://reference.data.gov.au/def/ont/agrif#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sparql: <http://www.w3.org/ns/sparql#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bld:Buldings a prov:Entity ;
+    rdfs:label "Buldings" .
+
+ex:CreateBuffer a prov:Activity ;
+    rdfs:label "GeoSPARQL sfBuffer query" ;
+    prov:used ex:HotSPots_temp310K+ .
+
+ex:No a prov:Entity ;
+    rdfs:label "No" ;
+    prov:wasAttributedTo ex:Jeremy ;
+    prov:wasGeneratedAtTime "2018-03-19T09:30:10+08:00"^^xsd:dateTime ;
+    prov:wasGeneratedBy geo:SelectWithin .
+
+ex:SelectHotSpot a prov:Activity ;
+    rdfs:label "SPARQL SELECT query" ;
+    prov:used ex:selectByTemperature .
+
+ex:WithinQuery a prov:Plan ;
+    rdfs:label "GeoSPARQL sfWithin query" .
+
+ex:SelectByAddress a prov:Plan ;
+    rdfs:label "SPARQL query with FILTER on 'ADDRESS' attribute" ;
+    prov:used bld:Buildings .
+
+ex:Crcsi a prov:Agent ;
+    rdfs:label "CRCSI" .
+
+ex:HotSPots_temp310K+ a prov:Entity ;
+    rdfs:label "HotSPots_temp310K+" ;
+    prov:endedAtTime "2018-03-19T09:30:12+08:00"^^xsd:dateTime ;
+    prov:startedAtTime "2018-03-19T09:30:11+08:00"^^xsd:dateTime ;
+    prov:wasGeneratedBy sparql1:SelectHotSpot .
+
+ex:Jeremy a prov:Agent ;
+    rdfs:label "Jeremy" ;
+    prov:actedOnBehalf ex:Crcsi .
+
+ex:SelectMyHouse a prov:Activity ;
+    rdfs:label "SelectMyHouse" ;
+    prov:used ex:SelectByAddress .
+
+ex:SelectByTemperature a prov:Plan ;
+    rdfs:label "SPARQL query with FILTER on 'TEMPERATURE' attribute" ;
+    prov:used ga:HotSpots .
+
+ex:MyHouse a prov:Entity ;
+    rdfs:label "myHouse" ;
+    prov:endedAtTime "2018-03-19T09:30:10+08:00"^^xsd:dateTime ;
+    prov:startedAtTime "2018-03-19T09:30:09+08:00"^^xsd:dateTime ;
+    prov:wasGeneratedBy ex:SelectMyHouse .
+
+ex:RiskArea a prov:Entity ;
+    rdfs:label "riskArea" ;
+    prov:endedAtTime "2018-03-19T09:30:14+08:00"^^xsd:dateTime ;
+    prov:startedAtTime "2018-03-19T09:30:13+08:00"^^xsd:dateTime ;
+    prov:wasGeneratedBy ex:CreateBuffer .
+
+geo:SelectWithin a prov:Activity ;
+    rdfs:label "Within Selection" ;
+    prov:used ex:WithinQuery , ex:myHouse ;
+    prov:generated ex:RiskArea .
+
+ga:HotSpots a prov:Entity ;
+    rdfs:label "HotSpots" .
