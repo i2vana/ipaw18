@@ -1,0 +1,58 @@
+@prefix bld: <http://example.org/buildings#> .
+@prefix decprov: <http://promsns.org/def/decprov#> .
+@prefix ex: <http://www.example.ex/ns/ex#> .
+@prefix ga: <http://www.sentinel.ga.gov.au/hotspots#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix gov: <http://reference.data.gov.au/def/ont/agrif#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sparql: <http://ontologi.es/sparql#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bld:Buildings a prov:Entity ;
+    rdfs:label "Buildings" ;
+    prov:wasAttributedTo gov:Dewlp ;
+    prov:wasGeneratedAtTime "2016-01-31T09:30:10+08:00"^^xsd:dateTime ;
+    prov:wasGeneratedBy ex:DatasetSelection .
+
+ga:HotSpots a prov:Entity ;
+    rdfs:label "HotSpots" ;
+    xml:hasAttribute "ga:confidence" ;
+    prov:value "92" ;
+    prov:wasAttributedTo gov:Ga ;
+    prov:wasGeneratedAtTime "2018-03-19T09:30:10+08:00"^^xsd:dateTime ;
+    prov:wasGeneratedBy ex:DatasetSelection .
+
+gov:Ga a prov:Agent .
+
+ex:BrokerSystem a prov:Agent ;
+    prov:actedOnBehalfOf ex:Jeremy .
+
+ex:Q2 a decprov:Question ;
+    prov:value "Which dataset are fit for use in ‘Is my house at risk?" .
+
+ex:Req1 a decprov:Requirement ;
+    prov:value "Buildings dataset prov:Agent from the list of AU trusted providers" .
+
+ex:Req2 a decprov:Requirement ;
+    prov:value "Buildings dataset prov:generatedAtTime not earlier than 2010" .
+
+ex:Req3 a decprov:Requirement ;
+    prov:value "HotSpots dataset prov:Agent from the list of AU trusted providers" .
+
+ex:Req4 a decprov:Requirement ;
+    prov:value "HotSpots dataset prov:generatedAtTime not earlier than current time – 2h" .
+
+ex:Req5 a decprov:Requirement ;
+    prov:value "HotSpots dataset hastAttribute ‘confidence’ and its value >90%" .
+
+ex:DatasetSelection a decprov:OptionSelection ;
+    prov:used ex:Req1,
+        ex:Req2,
+        ex:Req3,
+        ex:Req4,
+        ex:Req5 ;
+    prov:wasAssociatedWith ex:BrokerSystem ;
+    prov:wasStartedBy ex:Q2 .

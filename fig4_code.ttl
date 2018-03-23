@@ -1,0 +1,97 @@
+@prefix bld: <http://example.org/buildings#> .
+@prefix decprov: <http://promsns.org/def/decprov#> .
+@prefix ex: <http://www.example.ex/ns/ex#> .
+@prefix ga: <http://www.sentinel.ga.gov.au/hotspots#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix gov: <http://reference.data.gov.au/def/ont/agrif#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sparql: <http://ontologi.es/sparql#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wso: <http://www.purl.org/net/wso#> .
+
+ga:HotSpots a decprov:Answer ;
+	rdfs:label "HotSpots" ;
+	prov:wasGeneratedBy ex:DatasetSelection ;
+	prov:wasAssociatedWith ex:HotSpotsWfs ;
+	decprov:wasInfluencedBy ex:Question1 .
+
+bld:Buildings a decprov:Answer ;
+	rdfs:label "Buildings" ;
+	prov:wasGeneratedBy ex:DatasetSelection ;
+	prov:wasAssociatedWith ex:BuildingsWfs ;
+	decprov:wasInfluencedBy ex:Question1 .
+	
+ex:HotSpotsWfs a prov:Agent .
+
+ex:BuildingsWfs a prov:Agent .
+
+ex:Question1 a decprov:Question ;
+	rdfs:label "Question1" ;
+	decprov:wasStartedBy ex:DecomposeQuery .
+
+ex:DatasetSelection a decprov:OptionSelection ;
+	rdfs:label "OptionSelection" ;
+	decprov:wasStartedBy ex:Question1 ;
+	prov:used ex:Req1, ex:Req2, ex:Req3, ex:Req4, ex:Req5, ex:Req6, ex:Req7, ex:Req8, ex:Req9 .
+	
+ex:Req1 a decprov:Requirement ;
+	rdfs:label "Req1" ;
+	prov:value: "BUILDINGS dataset has prov:generatedBy earlier than 01/01/2010" .
+
+ex:Req2 a decprov:Requirement ;
+	rdfs:label "Req2" ;
+	prov:value: "HOTSPOT dataset has prov:generatedBy earlier than 'TODAY'" .
+
+ex:Req3 a decprov:Requirement ;
+	rdfs:label "Req3" ;
+	prov:value: "HOTSPOT dataset has CONFIDENCE attribute" .
+	
+ex:Req4 a decprov:Requirement ;
+	rdfs:label "Req4" ;
+	prov:value: "HOTSPOT dataset has TEMPERATURE attribute" .
+	
+ex:Req5 a decprov:Requirement ;
+	rdfs:label "Req5" ;
+	prov:value: "HOTSPOTdataset has geometry  sf:Point" .
+	
+ex:Req6 a decprov:Requirement ;
+	rdfs:label "Req6" ;
+	prov:value: "BUILDINGS dataset has  geometry ISO 19107 GM_Object" .
+	
+ex:Req7 a decprov:Requirement ;
+	rdfs:label "Req7" ;
+	prov:value: "WFS has HOTSPOTS" .
+	
+ex:Req8 a decprov:Requirement ;
+	rdfs:label "Req8" ;
+	prov:value: "WFS has BUILDINGS" .
+	
+ex:Req9 a decprov:Requirement ;
+	rdfs:label "Req9" ;
+	prov:value: "BUILDINGS dataset has prov:Agent with value from the list of trusted agents" .
+	
+wso:Dwithin a decprov:Answer ;
+	rdfs:label "Dwithin" ;
+	prov:wasGeneratedBy ex:OperatorIdentification ;
+	prov:wasAssociatedWith ex:BrokerSystem ;
+	decprov:wasInfluencedBy ex:Question2 .
+	
+ex:OperatorIdentification a decprov:OptionSelection ;
+	rdfs:label "OptionSelection" ;
+	decprov:wasStartedBy ex:Question2 .
+
+ex:Question2 a decprov:Question2 ;
+	rdfs:label "Question2" ;
+	decprov:wasStartedBy ex:DecomposeQuery .
+
+ex:DecomposeQuery a prov:Activity ;
+	rdfs:label "DecomposeQuery" ;
+	prov:used ex:UserQuery ;
+	prov:wasAssociatedWith ex:BrokerSystem .
+
+ex:UserQuery a prov:Entity ;
+	rdfs:label "UserQuery" ;
+	prov:value "Is my house in fire danger today?" .
