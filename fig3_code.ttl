@@ -1,0 +1,63 @@
+@prefix bld: <http://example.org/buildings#> .
+@prefix decprov: <http://promsns.org/def/decprov#> .
+@prefix ex: <http://www.example.ex/ns/ex#> .
+@prefix ga: <http://www.sentinel.ga.gov.au/hotspots#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix gov: <http://reference.data.gov.au/def/ont/agrif#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sparql: <http://ontologi.es/sparql#> .
+@prefix sparql1: <http://www.w3.org/ns/sparql#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bld:Buldings a prov:Entity ;
+    rdfs:label "Buldings" .
+
+ex:MyHouse a prov:Entity ;
+    rdfs:label "myHouse" ;
+    prov:wasGeneratedBy ex:SelectMyHouse .
+
+ex:No a prov:Entity ;
+    rdfs:label "No" ;
+    prov:wasGeneratedBy geo:SelectWithin .
+
+ex:SelectByTemperature a prov:Plan ;
+    rdfs:label "SPARQL query with FILTER on 'TEMPERATURE' attribute" ;
+    prov:used ga:HotSpots .
+
+ex:CreateBuffer a prov:Activity ;
+    rdfs:label "GeoSPARQL sfBuffer query" ;
+    prov:used ex:HotSPots_temp310K .
+
+ex:HotSPots_temp310K a prov:Entity ;
+    rdfs:label "HotSPots_temp310K+" ;
+    prov:wasGeneratedBy ex:SelectHotSpot .
+
+ex:RiskArea a prov:Entity ;
+    rdfs:label "riskArea" ;
+    prov:wasGeneratedBy ex:CreateBuffer .
+
+ex:SelectByAddress a prov:Plan ;
+    rdfs:label "SPARQL query with FILTER on 'ADDRESS' attribute" ;
+    prov:used bld:Buildings .
+
+ex:SelectHotSpot a prov:Activity ;
+    rdfs:label "SPARQL SELECT query" ;
+    prov:used ex:selectByTemperature .
+
+ex:SelectMyHouse a prov:Activity ;
+    rdfs:label "SelectMyHouse" ;
+    prov:used ex:SelectByAddress .
+
+ex:WithinQuery a prov:Plan ;
+    rdfs:label "GeoSPARQL sfWithin query" .
+
+geo:SelectWithin a prov:Activity ;
+    rdfs:label "Within Selection" ;
+    prov:generated ex:RiskArea ;
+    prov:used ex:WithinQuery, ex:myHouse .
+
+ga:HotSpots a prov:Entity ;
+    rdfs:label "HotSpots" .

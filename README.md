@@ -1,5 +1,8 @@
-This repository contains .ttl code corresponding to the examples in the paper submitted to the IPAW'18 conference. 
+# Resources for the paper *Is my house at risk?*
+This repository contains images and the corresponding RDF data for figures in the paper *Is my house at risk? No. Why should I trust you? See my data provenance!* submitted to the IPAW track of [Provenance Week, 2018](http://provenanceweek2018.org).
 
-Paper title: 
-<p> <b>Is my house at risk? No. Why should I trust you? See my data provenance! <br>
-<i> Using provenance for producing informed and reliable answers to spatial questions.</b> </p>
+## Contact
+Ivana Ivánová  
+*Senior Lecturer/CRCSI Research Fellow*  
+Curtin University  
+<ivana.ivanova@curtin.edu.au>  
