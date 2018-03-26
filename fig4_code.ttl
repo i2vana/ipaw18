@@ -13,7 +13,7 @@
 @prefix wso: <http://www.purl.org/net/wso#> .
 
 ga:HotSpots a decprov:Answer ;
-	rdfs:label "HotSpots" ;
+	rdfs:label "Hotspots" ;
 	prov:wasGeneratedBy ex:DatasetSelection ;
 	prov:wasAssociatedWith ex:HotSpotsWfs ;
 	decprov:wasInfluencedBy ex:Question1 .
@@ -24,74 +24,73 @@ bld:Buildings a decprov:Answer ;
 	prov:wasAssociatedWith ex:BuildingsWfs ;
 	decprov:wasInfluencedBy ex:Question1 .
 	
-ex:HotSpotsWfs a prov:Agent .
+ex:HotSpotsWfs a prov:Agent ;
+	rdfs:label "Hotspots WFS" .
 
-ex:BuildingsWfs a prov:Agent .
+ex:BuildingsWfs a prov:Agent ;
+	rdfs:label "Buildings WFS" .
 
 ex:Question1 a decprov:Question ;
-	rdfs:label "Question1" ;
+	rdfs:label "Question 1" ;
+	prov:value "Which datasets are good candidates?" ;
 	decprov:wasStartedBy ex:DecomposeQuery .
 
 ex:DatasetSelection a decprov:OptionSelection ;
-	rdfs:label "OptionSelection" ;
+	rdfs:label "Select Dataset" ;
 	decprov:wasStartedBy ex:Question1 ;
 	prov:used ex:Req1, ex:Req2, ex:Req3, ex:Req4, ex:Req5, ex:Req6, ex:Req7, ex:Req8, ex:Req9 .
 	
 ex:Req1 a decprov:Requirement ;
-	rdfs:label "Req1" ;
-	prov:value: "BUILDINGS dataset has prov:generatedBy earlier than 01/01/2010" .
+	rdfs:label "Req 1" ;
+    prov:value "Dataset contains building class objects" .
 
 ex:Req2 a decprov:Requirement ;
-	rdfs:label "Req2" ;
-	prov:value: "HOTSPOT dataset has prov:generatedBy earlier than 'TODAY'" .
+	rdfs:label "Req 2" ;
+    prov:value "Dataset prov:wasAttributedTo a trusted agent" .
 
-ex:Req3 a decprov:Requirement ;
-	rdfs:label "Req3" ;
-	prov:value: "HOTSPOT dataset has CONFIDENCE attribute" .
-	
+ex:Req3 a decprovRequirement ;
+	rdfs:label "Req 3" ;
+	prov:value "Dataset has prov:generatedAtTime >= year(2010)" .
+
 ex:Req4 a decprov:Requirement ;
-	rdfs:label "Req4" ;
-	prov:value: "HOTSPOT dataset has TEMPERATURE attribute" .
-	
+	rdfs:label "Req 4" ;
+    prov:value "Dataset contains Temperature class objects" .
+
 ex:Req5 a decprov:Requirement ;
-	rdfs:label "Req5" ;
-	prov:value: "HOTSPOTdataset has geometry  sf:Point" .
-	
+	rdfs:label "Req 5" ;
+    prov:value "Dataset prov:wasAttributedTo an trusted Agent" .
+
 ex:Req6 a decprov:Requirement ;
-	rdfs:label "Req6" ;
-	prov:value: "BUILDINGS dataset has  geometry ISO 19107 GM_Object" .
-	
-ex:Req7 a decprov:Requirement ;
-	rdfs:label "Req7" ;
-	prov:value: "WFS has HOTSPOTS" .
-	
-ex:Req8 a decprov:Requirement ;
-	rdfs:label "Req8" ;
-	prov:value: "WFS has BUILDINGS" .
-	
-ex:Req9 a decprov:Requirement ;
-	rdfs:label "Req9" ;
-	prov:value: "BUILDINGS dataset has prov:Agent with value from the list of trusted agents" .
+	rdfs:label "Req 6" ;
+    prov:value "Dataset has prov:generatedAtTime >= hour(now-2)" .
 	
 wso:Dwithin a decprov:Answer ;
-	rdfs:label "Dwithin" ;
+	rdfs:label "Distance within" ;
 	prov:wasGeneratedBy ex:OperatorIdentification ;
 	prov:wasAssociatedWith ex:BrokerSystem ;
 	decprov:wasInfluencedBy ex:Question2 .
 	
 ex:OperatorIdentification a decprov:OptionSelection ;
-	rdfs:label "OptionSelection" ;
+	rdfs:label "Select Operator" ;
 	decprov:wasStartedBy ex:Question2 .
 
 ex:Question2 a decprov:Question2 ;
-	rdfs:label "Question2" ;
+	rdfs:label "Question 2" ;
+	prov:value "Which operators can answer the query?" ;
 	decprov:wasStartedBy ex:DecomposeQuery .
 
 ex:DecomposeQuery a prov:Activity ;
-	rdfs:label "DecomposeQuery" ;
+	rdfs:label "Decompose Query" ;
 	prov:used ex:UserQuery ;
 	prov:wasAssociatedWith ex:BrokerSystem .
 
+ex:BrokerSystem a prov:Agent ;
+	rdfs:label "Spatial Query Broker" ;
+	prov:actedOnBehalf ex:Jeremy .
+	
+ex:Jeremy a prov:Agent ;
+	rdfs:label "Jeremy" .
+
 ex:UserQuery a prov:Entity ;
-	rdfs:label "UserQuery" ;
-	prov:value "Is my house in fire danger today?" .
+	rdfs:label "User Query" ;
+	prov:value "Is my house in risk today?" .

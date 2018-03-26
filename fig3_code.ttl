@@ -13,7 +13,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bld:Buldings a prov:Entity ;
-    rdfs:label "Buldings" .
+    rdfs:label "WA Buldings Register" .
 
 ex:MyHouse a prov:Entity ;
     rdfs:label "myHouse" ;
@@ -24,11 +24,13 @@ ex:No a prov:Entity ;
     prov:wasGeneratedBy geo:SelectWithin .
 
 ex:SelectByTemperature a prov:Plan ;
-    rdfs:label "SPARQL query with FILTER on 'TEMPERATURE' attribute" ;
+    rdfs:label "Select By Temp." ;
+	prov:value "SPARQL FILTER on temperature attribute" ;
     prov:used ga:HotSpots .
 
 ex:CreateBuffer a prov:Activity ;
-    rdfs:label "GeoSPARQL sfBuffer query" ;
+    rdfs:label "Buffer query" ;
+	prov:value "GeoSPARQL sfBuffer query" ;
     prov:used ex:HotSPots_temp310K .
 
 ex:HotSPots_temp310K a prov:Entity ;
@@ -44,20 +46,21 @@ ex:SelectByAddress a prov:Plan ;
     prov:used bld:Buildings .
 
 ex:SelectHotSpot a prov:Activity ;
-    rdfs:label "SPARQL SELECT query" ;
+    rdfs:label "Selecting hotspots of a certain heat" ;
     prov:used ex:selectByTemperature .
 
 ex:SelectMyHouse a prov:Activity ;
-    rdfs:label "SelectMyHouse" ;
+    rdfs:label "Selecting my House" ;
     prov:used ex:SelectByAddress .
 
 ex:WithinQuery a prov:Plan ;
     rdfs:label "GeoSPARQL sfWithin query" .
 
 geo:SelectWithin a prov:Activity ;
-    rdfs:label "Within Selection" ;
+    rdfs:label "Within intersecting" ;
+	prov:value "GeoSPARQL sfWithin query" ;
     prov:generated ex:RiskArea ;
-    prov:used ex:WithinQuery, ex:myHouse .
+    prov:used ex:WithinQuery, ex:MyHouse .
 
 ga:HotSpots a prov:Entity ;
     rdfs:label "HotSpots" .

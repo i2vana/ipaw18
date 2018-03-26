@@ -12,7 +12,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 ex:FindAllHotspots a prov:Activity ;
-    rdfs:label "FindAllHotspots" ;
+    rdfs:label "Seelct All Hotspots" ;
     prov:wasAssociatedWith ex:HotSpotsServer ;
     prov:used ex:WfsRequest1 .
 
@@ -21,36 +21,36 @@ ex:No a prov:Entity ;
     prov:wasGeneratedBy ex:TestWithin .
 
 ex:AllHotSpots a prov:Entity ;
-    rdfs:label "AllHotSpots" ;
+    rdfs:label "All Hotspots" ;
     prov:wasGeneratedBy ex:FindAllHotSpots .
 
 ex:BuildingsServer a prov:Entity ;
-    rdfs:label "BuildingsServer" .
+    rdfs:label "Buildings WFS" .
 
 ex:FindMyHouse a prov:Activity ;
-    rdfs:label "FindMyHouse" ;
+    rdfs:label "Select My House" ;
     prov:wasAssociatedWith ex:BuildingsServer ; 
 	prov:used ex:WfsRequest2 .
 
 ex:HotSpotsServer a prov:Entity ;
-    rdfs:label "HotSpotsServer" .
+    rdfs:label "Hotspots WFS" .
 
 ex:MyHouse a prov:Entity ;
-    rdfs:label "MyHouse" ;
+    rdfs:label "My House" ;
     prov:wasGeneratedBy ex:FindMyHouse .
 
 ex:TestWithin a prov:Activity ;
-    rdfs:label "Test with 'Dwithin' spatial operator" ;
+    rdfs:label "Within Intersection" ;
     prov:used ex:AllHotSpots, ex:MyHouse, ex:WfsRequest3 .
 
 ex:WfsRequest1 a prov:Plan ;
-    rdfs:label "WFS Attribute Filter"
-	prov:value "CQL_FILTER='TEMPERATURE'>310" .
+    rdfs:label "WFS Request 1"
+	prov:value "GetFeature Request with CQL_FILTER='TEMPERATURE'>310" .
 
 ex:WfsRequest2 a prov:Plan ;
-    rdfs:label "WFS Attribute Filter" ;
-	prov:value "CQL_FILTER='ADDRESS'='MyAddress'" .
+    rdfs:label "WFS Request 2" ;
+	prov:value "GetFeature Request with CQL_FILTER='ADDRESS'='MyAddress'" .
 
 ex:WfsRequest3 a prov:Plan ;
-	rdfs:label "WFS Within Filter" ;
-	prov:value "CQL_FILTER=DWITHIN(myHouse_geom,hotspots_geom,200km)" .
+	rdfs:label "WFS Request 3" ;
+	prov:value "GetFeature Request with CQL_FILTER=DWITHIN(myHouse_geom,hotspots_geom,200km)" .

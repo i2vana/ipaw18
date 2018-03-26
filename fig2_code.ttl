@@ -12,47 +12,73 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bld:Buildings a prov:Entity ;
-    rdfs:label "Buildings" ;
+    rdfs:label "WA Buildings Register" ;
     prov:wasAttributedTo gov:Dewlp ;
-    prov:wasGeneratedAtTime "2016-01-31T09:30:10+08:00"^^xsd:dateTime ;
-    prov:wasGeneratedBy ex:DatasetSelection .
+    prov:wasGeneratedAtTime "2016-01-31"^^xsd:dateTime ;
+    prov:wasGeneratedBy ex:DatasetSelectionA .
 
 ga:HotSpots a prov:Entity ;
-    rdfs:label "HotSpots" ;
-    xml:hasAttribute "ga:confidence" ;
-    prov:value "92" ;
+    rdfs:label "Sentinel Hotspots" ;
+    "ga:confidence" a prov:value "0.9" ;
     prov:wasAttributedTo gov:Ga ;
     prov:wasGeneratedAtTime "2018-03-19T09:30:10+08:00"^^xsd:dateTime ;
-    prov:wasGeneratedBy ex:DatasetSelection .
+    prov:wasGeneratedBy ex:DatasetSelectionB .
 
-gov:Ga a prov:Agent .
+gov:Ga a prov:Agent ;
+	rdfs:label "Geoscience Australia" .
+
+gov:Dewlp a prov:Agent ;
+	rdfs:label "DEWLP" .
 
 ex:BrokerSystem a prov:Agent ;
+	rdfs;label "Spatial Query Broker" ;
     prov:actedOnBehalfOf ex:Jeremy .
+	
+ex:Jeremy a prov:Agent ; 
+	rdfs:label "Jeremy"
 
-ex:Q2 a decprov:Question ;
-    prov:value "Which dataset are fit for use in ‘Is my house at risk?" .
+ex:Question1 a decprov:Question ;
+    rdfs:label "Question 1" ;
+	prov:value "Which dataset are fit for use in solving the user query?" .
 
 ex:Req1 a decprov:Requirement ;
-    prov:value "Buildings dataset prov:Agent from the list of AU trusted providers" .
+	rdfs:label "Req 1" ;
+    prov:value "Dataset contains building class objects" .
 
 ex:Req2 a decprov:Requirement ;
-    prov:value "Buildings dataset prov:generatedAtTime not earlier than 2010" .
+	rdfs:label "Req 2" ;
+    prov:value "Dataset prov:wasAttributedTo a trusted agent" .
 
-ex:Req3 a decprov:Requirement ;
-    prov:value "HotSpots dataset prov:Agent from the list of AU trusted providers" .
+ex:Req3 a decprovRequirement ;
+	rdfs:label "Req 3" ;
+	prov:value "Dataset has prov:generatedAtTime >= year(2010)" .
 
 ex:Req4 a decprov:Requirement ;
-    prov:value "HotSpots dataset prov:generatedAtTime not earlier than current time – 2h" .
+	rdfs:label "Req 4" ;
+    prov:value "Dataset contains Temperature class objects" .
 
 ex:Req5 a decprov:Requirement ;
-    prov:value "HotSpots dataset hastAttribute ‘confidence’ and its value >90%" .
+	rdfs:label "Req 5" ;
+    prov:value "Dataset prov:wasAttributedTo an trusted Agent" .
 
-ex:DatasetSelection a decprov:OptionSelection ;
-    prov:used ex:Req1,
-        ex:Req2,
-        ex:Req3,
-        ex:Req4,
-        ex:Req5 ;
+ex:Req6 a decprov:Requirement ;
+	rdfs:label "Req 6" ;
+    prov:value "Dataset has prov:generatedAtTime >= hour(now-2)" .
+
+ex:DatasetSelectionA a decprov:OptionSelection ;
+	rdfs:label "Building Dataset Selection
+    prov:used ex:Req1, ex:Req2, ex:Req3, ex:InputCandidatesA ;
     prov:wasAssociatedWith ex:BrokerSystem ;
-    prov:wasStartedBy ex:Q2 .
+    prov:wasStartedBy ex:Question1 .
+	
+ex:DatasetSelectionB a decprov:OptionSelection ;
+	rdfs:label "Hotspots Dataset Selection
+    prov:used ex:Req4, ex:Req5, ex:Req6, ex:InputCandidatesB ;
+    prov:wasAssociatedWith ex:BrokerSystem ;
+    prov:wasStartedBy ex:Question1 .
+	
+ex:InputCandidatesA a prov:Collection ;
+	rdfs:label "Input Candidates A" .
+
+ex:InputCandidatesB a prov:Collection ;
+	rdfs:label "Input Candidates B" .
